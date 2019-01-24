@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import os
 import subprocess
 from datetime import datetime
