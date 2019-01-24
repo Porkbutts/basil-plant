@@ -1,6 +1,6 @@
 import os, sys
 import imageio
-from datetime import datetime, timedelta
+from datetime import datetime
 from config import load
 ROOT_DIR = load()['root_directory']
 
@@ -13,8 +13,7 @@ if __name__ == '__main__':
   if len(sys.argv) > 1:
     date = sys.argv[1]
   else:
-    # Subtract 30 minutes since this script runs at midnight
-    date = str(datetime.now() - timedelta(minutes=30)).split(' ')[0]
+    date = str(datetime.now()).split(' ')[0]
 
   abs_path = '{}/{}'.format(ROOT_DIR, date)
   print 'Reading images from folder "{}"'.format(abs_path)
