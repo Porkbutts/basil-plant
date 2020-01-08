@@ -2,7 +2,10 @@ import os
 import subprocess
 from datetime import datetime
 from config import load
-ROOT_DIR = load()['root_directory']
+
+conf = load()
+ROOT_DIR = conf['root_directory']
+RESOLUTION = conf['resolution']
 
 if __name__ == '__main__':
   now = str(datetime.now().replace(microsecond=0))
@@ -17,6 +20,6 @@ if __name__ == '__main__':
     os.mkdir(abs_dirpath)
 
   print 'Saving image to {}'.format(abs_filepath)
-  subprocess.call(['fswebcam', abs_filepath]) 
+  subprocess.call(['fswebcam', '-r', RESOLUTION, abs_filepath]) 
   
 
