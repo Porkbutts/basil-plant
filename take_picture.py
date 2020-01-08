@@ -5,7 +5,8 @@ from config import load
 
 conf = load()
 ROOT_DIR = conf['root_directory']
-RESOLUTION = conf['resolution']
+RESOLUTION = conf.get('resolution', '640x480')
+DISPLAY_BANNER = conf.get('display_banner', True)
 
 if __name__ == '__main__':
   now = str(datetime.now().replace(microsecond=0))
@@ -20,6 +21,13 @@ if __name__ == '__main__':
     os.mkdir(abs_dirpath)
 
   print 'Saving image to {}'.format(abs_filepath)
-  subprocess.call(['fswebcam', '-r', RESOLUTION, abs_filepath]) 
+
+  args = ['fswebcam', '-r', RESOLUTION]
+
+  if not DISPLAY_BANNER:
+    args.append('--no-banner')
+
+  args.append(abs_filepath)
+  subprocess.call(args)
   
 
